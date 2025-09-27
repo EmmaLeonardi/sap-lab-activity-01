@@ -24,7 +24,7 @@ public class ViewOutput extends JFrame implements ViewInterface{
 		setResizable(false);
 		
         //The output label
-		this.resultField = new JLabel("Output: ");	
+		this.resultField = new JLabel("Output: 0");	
 		
 		setLayout(new BorderLayout());
 	    add(this.resultField,BorderLayout.NORTH);
