@@ -1,7 +1,5 @@
 package bbom;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class MyImprovedApp {
 
 	private final View view;
