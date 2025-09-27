@@ -19,5 +19,11 @@ public interface ControllerInterface {
      * A function called by the view to update the controller
      */
     public void onUpdate();
+
+    /** 
+     * A function called by the view to update the controller
+     * @param value the value from the input view
+     */
+    public void onUpdate(final int value);
     
 }

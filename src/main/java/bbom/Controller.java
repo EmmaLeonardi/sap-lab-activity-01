@@ -17,10 +17,7 @@ public class Controller implements ControllerInterface{
     }
 
     public void onUpdate(){
-        model.update();
-        var value=model.getState(); //New value 
-        //Update all views registered in the set
-        views.stream().forEach(elem->elem.controllerUpdate(value)); 
+        this.onUpdate(1);
     }
 
     @Override
@@ -32,6 +29,16 @@ public class Controller implements ControllerInterface{
     public void registerCallback(final ViewInterface view) {
         //Adds the view to the set of views to update
         this.views.add(view);
+    }
+
+    @Override
+    public void onUpdate(int value) {
+        for(int i=0; i< value; i++){
+            model.update();
+        }
+        var result=model.getState(); //New value 
+        //Update all views registered in the set
+        views.stream().forEach(elem->elem.controllerUpdate(result)); 
     }
     
 }
