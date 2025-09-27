@@ -2,34 +2,34 @@ package bbom;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
+import java.lang.reflect.InvocationTargetException;
 
-public class View extends JFrame implements ActionListener{
+import bbom.interfaces.ControllerInterface;
+import bbom.interfaces.ViewInterface;
 
-    private Controller controller;
+public class View extends JFrame implements ActionListener, ViewInterface{
+
+    private ControllerInterface controller;
 
     public View() {		
-		super("My App");
+		super("My Input App");
 		
 		setSize(300, 70);
 		setResizable(false);
 		
+		//The input button
 		var updateButton = new JButton("Update");
 		updateButton.addActionListener(this);
 
-		var panel = new JPanel();		
-		panel.add(updateButton);		
-		
 		setLayout(new BorderLayout());
-	    add(panel,BorderLayout.NORTH);
+	    add(updateButton,BorderLayout.NORTH);
 	    	    		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent ev) {
@@ -39,26 +39,32 @@ public class View extends JFrame implements ActionListener{
         
 	}
 
-    public void start() throws InvocationTargetException, InterruptedException{
-        SwingUtilities.invokeAndWait(() -> {
-			this.setVisible(true);
-		});
+    public void start(){
+		try {
+			SwingUtilities.invokeAndWait(() -> {
+				//Sets window as visible
+				this.setVisible(true);
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
     }
-
-    private static void log(String msg) {
-		System.out.println("[Output] " + msg);
-	}
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        var x=this.controller.onUpdate();
-        log(x+"");
+		//The button was clicked, update the controller
+        this.controller.onUpdate();
     }
 
-    public void addController(final Controller controller) {
+	@Override
+    public void addController(final ControllerInterface controller) {
         this.controller=controller;
     }
 
-    
+	@Override
+	public void controllerUpdate(final int value) {
+		//This view is only for the input, so the controller won't update it
+	}
     
 }

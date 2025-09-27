@@ -1,21 +1,37 @@
 package bbom;
 
-public class Controller {
+import java.util.HashSet;
+import java.util.Set;
 
-    private Model model;
+import bbom.interfaces.ControllerInterface;
+import bbom.interfaces.ModelInterface;
+import bbom.interfaces.ViewInterface;
+
+public class Controller implements ControllerInterface{
+
+    private ModelInterface model;
+    private Set<ViewInterface> views;
 
     public Controller(){
-
+        this.views=new HashSet<>();
     }
 
-    public int onUpdate(){
+    public void onUpdate(){
         model.update();
-        return model.getState();
-
+        var value=model.getState(); //New value 
+        //Update all views registered in the set
+        views.stream().forEach(elem->elem.controllerUpdate(value)); 
     }
 
-    public void addModel(final Model model) {
+    @Override
+    public void addModel(final ModelInterface model) {
         this.model=model;
+    }
+
+    @Override
+    public void registerCallback(final ViewInterface view) {
+        //Adds the view to the set of views to update
+        this.views.add(view);
     }
     
 }
