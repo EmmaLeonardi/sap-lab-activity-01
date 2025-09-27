@@ -28,7 +28,7 @@ public class MyImprovedApp {
 		
 	}
 
-	public void startApp() throws InvocationTargetException, InterruptedException{
+	public void startApp(){
 		//Starts the GUIs
 		this.view.start();
 		this.viewOutput.start();
