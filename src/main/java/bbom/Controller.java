@@ -10,7 +10,7 @@ import bbom.interfaces.ViewInterface;
 public class Controller implements ControllerInterface{
 
     private ModelInterface model;
-    private Set<ViewInterface> views;
+    private final Set<ViewInterface> views;
 
     public Controller(){
         this.views=new HashSet<>();
