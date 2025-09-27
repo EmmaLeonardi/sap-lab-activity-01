@@ -5,21 +5,30 @@ import java.lang.reflect.InvocationTargetException;
 public class MyImprovedApp {
 
 	private final View view;
+	private final ViewOutput viewOutput;
 	private final Controller controller;
 	private final Model model;
 	
 
 	public MyImprovedApp() {	
+		//Views
 		this.view=new View();
+		this.viewOutput=new ViewOutput();
+		//Controller
 		this.controller=new Controller();
+		//Model
 		this.model=new Model();
+		//Connecting the components
+		this.viewOutput.addController(this.controller);
 		this.view.addController(this.controller);
 		this.controller.addModel(this.model);
 		
 	}
 
 	public void startApp() throws InvocationTargetException, InterruptedException{
+		//Starts the GUIs
 		this.view.start();
+		this.viewOutput.start();
 	}
 
     static public void main(String[] args) throws Exception {			  
