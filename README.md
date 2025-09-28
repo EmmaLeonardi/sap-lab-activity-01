@@ -16,7 +16,7 @@
       - e.g. an active component repeatedly (every second) updating the model 
 	- adding distribution: a new remote view, based on a MOM or RMI
 
- #Architecture diagram
+ # Architecture diagram
  ![Architecture diagram](https://github.com/EmmaLeonardi/sap-lab-activity-01/blob/main/Architecture.png?raw=true)
 
 
